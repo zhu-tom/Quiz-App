@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">1601 Quiz</string>
+    <string name="prev_button_label">Prev</string>
+    <string name="next_button_label">Next</string>
+    <string name="submit_button_label">Submit</string>
+    <string name="question_text">Is Java an Object-Oriented Language\nYes or No?</string>
+    <string name="correct_answer_toast">Correct!</string>
+    <string name="wrong_answer_toast">Wrong!</string>
+
+    <string name="a_button_label">A</string>
+    <string name="b_button_label">B</string>
+    <string name="c_button_label">C</string>
+    <string name="d_button_label">D</string>
+    <string name="e_button_label">E</string>
+
+    <string-array name="questions">
+        <item>
+            Question 1: Consider the following line of code.\n\nButton btn;\n\nWhat is stored in the btn object?\n[A]null\n[B]The memory address of the allocated memory of btn\n[C]The Button class\n[D]Garbage\n[E]A Button object{A}
+        </item>
+        <item>Question 2: {B}</item>
+        <item>Question 3: {C}</item>
+        <item>Question 4: {D}</item>
+        <item>Question 5: {E}</item>
+        <item>Question 6: {E}</item>
+        <item>Question 7: {D}</item>
+        <item>Question 8: {C}</item>
+        <item>Question 9: {B}</item>
+        <item>Question 10: {A}</item>
+    </string-array>
+</resources>
+

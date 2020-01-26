@@ -1,6 +1,8 @@
 package com.comp1601.truefalsequiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < mQuestions.size(); i++) {
                 userAnswerID = mUserAnswers[i];
                 if (userAnswerID != 0) { // user answer is non-empty
-                    String userAnswer = ((Button) findViewById(userAnswerID)).getText().toString();
+                    String userAnswer = ((Button) findViewById(userAnswerID)).getTag().toString();
                     String correctAnswer = mQuestions.get(i).getAnswer();
 
                     if (userAnswer.equals(correctAnswer)) numCorrect++; // compare user and actual answer
@@ -74,14 +76,18 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView = findViewById(R.id.question_text_view);
 
         mQuestions = new ArrayList<>();
-        String[] rawQuestions = getResources().getStringArray(R.array.questions);
-        for (String q: rawQuestions) {
-            mQuestions.add(new Question(q));
+        TypedArray rawQuestions = getResources().obtainTypedArray(R.array.questions);
+        for (int i = 0; i < rawQuestions.length(); i++) {
+            int rawQuestionResourceId = rawQuestions.getResourceId(i, 0);
+            if (rawQuestionResourceId != 0) {
+                String[] rawQuestion = getResources().getStringArray(rawQuestionResourceId);
+                mQuestions.add(new Question(rawQuestion));
+            }
         }
 
         mUserAnswers = new int[mQuestions.size()];
 
-        mQuestionTextView.setText(mQuestions.get(mCurrentQuestionIndex).getQuestion());
+        goToQuestion(0);
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -105,7 +111,14 @@ public class MainActivity extends AppCompatActivity {
         else if (mCurrentQuestionIndex < 0) {
             mCurrentQuestionIndex = mQuestions.size()-1; // shift to back
         }
-        mQuestionTextView.setText(mQuestions.get(mCurrentQuestionIndex).getQuestion()); // change question text
+        Question currentQuestion = mQuestions.get(mCurrentQuestionIndex);
+        mQuestionTextView.setText(currentQuestion.getQuestion()); // change question text
+        String[] options = currentQuestion.getOptions(); // add in options
+        mAButton.setText(options[0]);
+        mBButton.setText(options[1]);
+        mCButton.setText(options[2]);
+        mDButton.setText(options[3]);
+        mEButton.setText(options[4]);
 
         selectButton(mUserAnswers[mCurrentQuestionIndex]); // add color to new answer
     }

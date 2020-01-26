@@ -13,19 +13,28 @@
     <string name="d_button_label">D</string>
     <string name="e_button_label">E</string>
 
-    <string-array name="questions">
-        <item>
-            Question 1: Consider the following line of code.\n\nButton btn;\n\nWhat is stored in the btn object?\n[A]null\n[B]The memory address of the allocated memory of btn\n[C]The Button class\n[D]Garbage\n[E]A Button object{A}
-        </item>
-        <item>Question 2: {B}</item>
-        <item>Question 3: {C}</item>
-        <item>Question 4: {D}</item>
-        <item>Question 5: {E}</item>
-        <item>Question 6: {E}</item>
-        <item>Question 7: {D}</item>
-        <item>Question 8: {C}</item>
-        <item>Question 9: {B}</item>
-        <item>Question 10: {A}</item>
+    <array name="questions">
+        <item>@array/question1</item>
+        <item>@array/question2</item>
+    </array>
+
+    <string-array name="question1">
+        <item>1. Consider the following line of code.\n\n\tButton btn;\n\nWhat is stored in the btn object?</item>
+        <item>[A] null</item>
+        <item>[B] The memory address of the allocated memory of btn</item>
+        <item>[C] The Button class</item>
+        <item>[D] Garbage</item>
+        <item>[E] A Button object</item>
+        <item>A</item>
+    </string-array>
+    <string-array name="question2">
+        <item>2. What is the correct syntax for declaring XML version?</item>
+        <item>[A] &lt;?xml version=\"1.0\";&gt;</item>
+        <item>[B] &lt;?xml version=\"1.0\"?&gt;</item>
+        <item>[C] &lt;xml version=\"1.0\"/&gt;</item>
+        <item>[D] &lt;?xml version=\"1.0\"/&gt;</item>
+        <item>[E] None of the above</item>
+        <item>B</item>
     </string-array>
 </resources>
 

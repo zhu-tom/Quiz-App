@@ -16,15 +16,23 @@
     <array name="questions">
         <item>@array/question1</item>
         <item>@array/question2</item>
+        <item>@array/question3</item>
+        <item>@array/question4</item>
+        <item>@array/question5</item>
+        <item>@array/question6</item>
+        <item>@array/question7</item>
+        <item>@array/question8</item>
+        <item>@array/question9</item>
+        <item>@array/question10</item>
     </array>
 
     <string-array name="question1">
         <item>1. Consider the following line of code.\n\n\tButton btn;\n\nWhat is stored in the btn object?</item>
         <item>[A] null</item>
-        <item>[B] The memory address of the allocated memory of btn</item>
-        <item>[C] The Button class</item>
-        <item>[D] Garbage</item>
-        <item>[E] A Button object</item>
+        <item>[B] The memory address of the allocated memory of btn.</item>
+        <item>[C] The Button class.</item>
+        <item>[D] Garbage.</item>
+        <item>[E] A Button object.</item>
         <item>A</item>
     </string-array>
     <string-array name="question2">
@@ -33,8 +41,80 @@
         <item>[B] &lt;?xml version=\"1.0\"?&gt;</item>
         <item>[C] &lt;xml version=\"1.0\"/&gt;</item>
         <item>[D] &lt;?xml version=\"1.0\"/&gt;</item>
-        <item>[E] None of the above</item>
+        <item>[E] None of the above.</item>
         <item>B</item>
+    </string-array>
+    <string-array name="question3">
+        <item>3. What is the keyword to create a subclass in Java?</item>
+        <item>[A] subclass</item>
+        <item>[B] inherits</item>
+        <item>[C] extends</item>
+        <item>[D] childOf</item>
+        <item>[E] None of the above.</item>
+        <item>C</item>
+    </string-array>
+    <string-array name="question4">
+        <item>4. What does the * denote in Regular Expressions?</item>
+        <item>[A] Do not match the preceding.</item>
+        <item>[B] Match 1 or more of the preceding.</item>
+        <item>[C] Negative Lookahead.</item>
+        <item>[D] Match 0 or more of the preceding.</item>
+        <item>[E] Match any character.</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="question5">
+        <item>5. How do you refer to the current object inside a Java class?</item>
+        <item>[A] self</item>
+        <item>[B] obj</item>
+        <item>[C] current</item>
+        <item>[D] me</item>
+        <item>[E] this</item>
+        <item>E</item>
+    </string-array>
+    <string-array name="question6">
+        <item>6. The Mammal class inherits the Animal class.\nThe Lion class inherits the Mammal class.\nThe Reptile class inherits the Animal class\nThe Lizard class inherits the Reptile class\nThe Tiger class inherits the Mammal class\nWhat is true about ArrayList&lt;Mammal&gt;?</item>
+        <item>[A] It <b>can</b> contain objects of the Mammal class.</item>
+        <item>[B] It <b>can</b> contain objects of the Lion class.</item>
+        <item>[C] It <b>can</b> contain objects of the Tiger class.</item>
+        <item>[D] It <b>cannot</b> contain objects of the Snake class.</item>
+        <item>[E] All of the above.</item>
+        <item>E</item>
+    </string-array>
+    <string-array name="question7">
+        <item>7. What attribute would you add to make the width of a Button only as wide as what it contains? (in XML)</item>
+        <item>[A] layout_width=\"wrap_content\"</item>
+        <item>[B] android:layout_width=\"match_parent\"</item>
+        <item>[C] android:layout_width=\"fill_parent\"</item>
+        <item>[D] android:layout_width=\"wrap_content\"</item>
+        <item>[E] android:layout_height=\"wrap_content\"</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="question8">
+        <item>8. What is the keyword to access the methods of the parent class in Java?</item>
+        <item>[A] this</item>
+        <item>[B] upper</item>
+        <item>[C] super</item>
+        <item>[D] parent</item>
+        <item>[E] None of the above.</item>
+        <item>C</item>
+    </string-array>
+    <string-array name="question9">
+        <item>9. Which of the following best describes the difference between an object and a class in Java?</item>
+        <item>[A] They are the same thing.</item>
+        <item>[B] Classes are code, objects are memory.</item>
+        <item>[C] Classes are written in Java, objects are written in XML.</item>
+        <item>[D] Classes have methods, objects do not.</item>
+        <item>[E] Classes exist at runtime, object do not.</item>
+        <item>B</item>
+    </string-array>
+    <string-array name="question10">
+        <item>10. How many methods are in the View.onClickListener interface?</item>
+        <item>[A] 1</item>
+        <item>[B] 2</item>
+        <item>[C] 3</item>
+        <item>[D] 4</item>
+        <item>[E] 0</item>
+        <item>A</item>
     </string-array>
 </resources>
 

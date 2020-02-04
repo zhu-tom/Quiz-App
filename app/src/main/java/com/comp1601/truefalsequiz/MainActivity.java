@@ -2,12 +2,14 @@ package com.comp1601.truefalsequiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mSubmitButton;
     private ArrayList<Question> mQuestions;
     private ArrayList<Button> mPageButtons;
+    private ArrayList<FrameLayout> mPageBorders;
     private int[] mUserAnswers;
     private TextView mQuestionTextView;
     private int mCurrentQuestionIndex = 0;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mDButton;
     private Button mEButton;
     private Resources mRes;
+    private ColorStateList mBasicButton;
+    private ColorStateList mSelectedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRes = getResources();
+        mSelectedButton = mRes.getColorStateList(R.color.selected_button);
+        mBasicButton = mRes.getColorStateList(R.color.basic_button);
 
         mPrevButton = findViewById(R.id.prev_button);
         mNextButton = findViewById(R.id.next_button);
@@ -52,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
                     if (userAnswer.equals(correctAnswer)) numCorrect++; // compare user and actual answer
                 }
-                unselectButton(mUserAnswers[i]);
-                mPageButtons.get(i).setBackgroundTintList(mRes.getColorStateList(R.color.basic_button));
+                unselectButton(mUserAnswers[i]); // reset answers
+                mPageButtons.get(i).setBackgroundTintList(mBasicButton); // show unanswered on page buttons
             }
             String toastText = "You got " + numCorrect + "/" + mQuestions.size();
             Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
@@ -85,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         mPageButtons = new ArrayList<>();
         mQuestions = new ArrayList<>();
+        mPageBorders = new ArrayList<>();
         TypedArray rawQuestions = mRes.obtainTypedArray(R.array.questions);
 
         LinearLayout pageButtonsLayout = findViewById(R.id.pages);
@@ -99,16 +107,23 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // add pagination buttons
+            FrameLayout buttonBox = new FrameLayout(this);
+            buttonBox.setLayoutParams(new LinearLayout.LayoutParams(buttonWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+            buttonBox.setPadding(1, 0,0,1);
+
             Button pageButton = new Button(this);
-            pageButton.setLayoutParams(new LinearLayout.LayoutParams(buttonWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+            pageButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             pageButton.setText(Integer.toString(i+1));
+            buttonBox.addView(pageButton);
+
             int pageNum = i;
             pageButton.setOnClickListener(v -> {
                 goToQuestion(pageNum);
             });
-            pageButtonsLayout.addView(pageButton);
+            pageButtonsLayout.addView(buttonBox);
 
             mPageButtons.add(pageButton);
+            mPageBorders.add(buttonBox);
         }
 
         mUserAnswers = new int[mQuestions.size()];
@@ -125,10 +140,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (mUserAnswers[mCurrentQuestionIndex] == id) { // clicked original answer
                 mUserAnswers[mCurrentQuestionIndex] = 0; // set to no answer
-                mPageButtons.get(mCurrentQuestionIndex).setBackgroundTintList(mRes.getColorStateList(R.color.basic_button)); // show no answer
+                mPageButtons.get(mCurrentQuestionIndex).setBackgroundTintList(mBasicButton); // show no answer on page buttons
             } else {
                 if (mUserAnswers[mCurrentQuestionIndex] == 0) { // no previous answer
-                    mPageButtons.get(mCurrentQuestionIndex).setBackgroundTintList(mRes.getColorStateList(R.color.selected_button)); // show answered
+                    mPageButtons.get(mCurrentQuestionIndex).setBackgroundTintList(mSelectedButton); // show answered on page buttons
                 }
                 mUserAnswers[mCurrentQuestionIndex] = id; // replace old answer with new
                 selectButton(id); // add coloring to new answer
@@ -137,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void goToQuestion(int nextQuestionIndex) {
+        mPageBorders.get(mCurrentQuestionIndex).setBackgroundColor(mRes.getColor(R.color.transparent));
         unselectButton(mUserAnswers[mCurrentQuestionIndex]); // remove color from old answer
 
         mCurrentQuestionIndex = nextQuestionIndex; // change current question to input
@@ -156,19 +172,20 @@ public class MainActivity extends AppCompatActivity {
         mEButton.setText(options[4]);
 
         selectButton(mUserAnswers[mCurrentQuestionIndex]); // add color to new answer
+        mPageBorders.get(mCurrentQuestionIndex).setBackgroundColor(mRes.getColor(R.color.black));
     }
 
     private void unselectButton(int id) {
         if (id != 0) {
             Button toUnselect = findViewById(id);
-            toUnselect.setBackgroundTintList(mRes.getColorStateList(R.color.basic_button));
+            toUnselect.setBackgroundTintList(mBasicButton);
         }
     }
 
     private void selectButton(int id) {
         if (id != 0) {
             Button selectedAnswer = findViewById(id);
-            selectedAnswer.setBackgroundTintList(mRes.getColorStateList(R.color.selected_button));
+            selectedAnswer.setBackgroundTintList(mSelectedButton);
         }
     }
 }

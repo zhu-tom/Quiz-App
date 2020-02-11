@@ -76,12 +76,14 @@ public class MainActivity extends AppCompatActivity {
             goToQuestion(nextQuestion);
         });
 
+        // initialize answer buttons
         mAButton = findViewById(R.id.a_button);
         mBButton = findViewById(R.id.b_button);
         mCButton = findViewById(R.id.c_button);
         mDButton = findViewById(R.id.d_button);
         mEButton = findViewById(R.id.e_button);
 
+        // add on click listeners to answer buttons
         mAButton.setOnClickListener(onClickListener);
         mBButton.setOnClickListener(onClickListener);
         mCButton.setOnClickListener(onClickListener);
@@ -97,20 +99,21 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout pageButtonsLayout = findViewById(R.id.pages);
         int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-        int buttonWidth = screenWidth/rawQuestions.length();
+        int buttonWidth = screenWidth/rawQuestions.length(); // divide screen width by number of question to get page button width
 
         for (int i = 0; i < rawQuestions.length(); i++) {
             int rawQuestionResourceId = rawQuestions.getResourceId(i, 0);
-            if (rawQuestionResourceId != 0) {
+            if (rawQuestionResourceId != 0) { // if question has id
                 String[] rawQuestion = mRes.getStringArray(rawQuestionResourceId);
                 mQuestions.add(new Question(rawQuestion));
             }
 
-            // add pagination buttons
+            // add page button outline
             FrameLayout buttonBox = new FrameLayout(this);
             buttonBox.setLayoutParams(new LinearLayout.LayoutParams(buttonWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
             buttonBox.setPadding(1, 0,0,1);
 
+            // add page button
             Button pageButton = new Button(this);
             pageButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             pageButton.setText(Integer.toString(i+1));
